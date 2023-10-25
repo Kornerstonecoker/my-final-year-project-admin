@@ -1,3 +1,8 @@
+/**
+ * The `ModalProvider` component is a React component that renders a `StoreModal` component only after
+ * it has been mounted.
+ * @returns The ModalProvider component is being returned.
+ */
 "use client"
 
 import { StoreModal } from "@/components/modals/store-modal";

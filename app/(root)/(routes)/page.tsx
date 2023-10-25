@@ -1,3 +1,7 @@
+/**
+ * The `SetupPage` component uses the `useStoreModal` hook to open a modal when the component mounts.
+ * @returns The SetupPage component is returning null.
+ */
 "use client"
 
 import { useEffect } from "react";
