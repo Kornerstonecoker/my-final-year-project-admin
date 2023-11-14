@@ -16,10 +16,15 @@ export function MainNav({
 component. Each object in the array represents a route and has three properties: */
   const routes = [
     {
+      href: `/${params.storeId}`,
+      label: "Overview",
+      active: pathname === `/${params.storeId}`,
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
-    },
+    }
   ];
   return (
     <nav className={cn("flex items-centers space-x-4 lg:space-x-6", className)}>
