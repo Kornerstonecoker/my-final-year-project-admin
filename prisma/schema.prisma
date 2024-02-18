@@ -14,6 +14,7 @@ model store {
   userId    String
   billboards Billboard[] @relation("StoreToBillboard")
   categories Category[] @relation("StoreToCategory")
+  size Size[] @relation("StoreToSize")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -45,16 +46,14 @@ model Category{
   @@index([billboardId])
 }
 
-// model Category {
-//   id          String      @id @default(uuid())
-//   storeId     String      // Foreign Key to Store
-//   store       store       @relation("StoreToCategory", fields: [storeId], references: [id])
-//   billboardId String      // Foreign Key to Billboard
-//   billboard   Billboard   @relation(fields: [billboardId], references: [id])
-//   name        String
-//   createdAt   DateTime    @default(now())
-//   updatedAt   DateTime    @updatedAt
+model Size{
+  id String @id @default(uuid())
+  storeId String
+  store store @relation("StoreToSize", fields: [storeId], references: [id])
+  name String
+  value String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
 
-//   @@index([storeId])
-//   @@index([billboardId])
-// }
+  @@index([storeId])
+}
