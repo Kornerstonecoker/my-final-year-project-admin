@@ -15,6 +15,7 @@ model store {
   billboards Billboard[] @relation("StoreToBillboard")
   categories Category[] @relation("StoreToCategory")
   size Size[] @relation("StoreToSize")
+  color Color[]@relation("StoreToColor")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -50,6 +51,18 @@ model Size{
   id String @id @default(uuid())
   storeId String
   store store @relation("StoreToSize", fields: [storeId], references: [id])
+  name String
+  value String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@index([storeId])
+}
+
+model Color{
+  id String @id @default(uuid())
+  storeId String
+  store store @relation("StoreToColor", fields: [storeId], references: [id])
   name String
   value String
   createdAt DateTime @default(now())
