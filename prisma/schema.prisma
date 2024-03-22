@@ -21,7 +21,6 @@ model store {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 }
-
 model Billboard {
   id         String     @id @default(uuid())
   storeId    String
@@ -94,6 +93,7 @@ model Product {
   orderItems OrderItem[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  periods Period[]
 
   @@index([storeId])
   @@index([categoryId])
@@ -126,20 +126,6 @@ model Order{
   @@index([storeId])
 }
 
-model Rental {
-  id        String   @id @default(uuid())
-  bikeId    String
-  productId String   
-  // UserId
-  startDate DateTime
-  endDate   DateTime
-  status    String   // e.g., "reserved", "rented", "returned", "cancelled"
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([productId])
-}
-
 model OrderItem{
     id        String   @id @default(uuid())
     orderId String
@@ -149,4 +135,21 @@ model OrderItem{
 
     @@index([orderId])
     @@index([productId])
+}
+
+model Period {
+  id String @id @default(uuid())
+  from DateTime
+  to DateTime
+  productId String
+  product Product @relation(fields: [productId], references: [id])
+  
+  @@index([productId])
+}
+
+
+
+model ClosedDay {
+  id   String   @id @default(cuid())
+  date DateTime @unique
 }
