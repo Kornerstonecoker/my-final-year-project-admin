@@ -94,6 +94,7 @@ model Product {
   orderItems OrderItem[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  bookings Booking[]
 
   @@index([storeId])
   @@index([categoryId])
@@ -126,19 +127,23 @@ model Order{
   @@index([storeId])
 }
 
-model Rental {
-  id        String   @id @default(uuid())
-  bikeId    String
-  productId String   
-  // UserId
-  startDate DateTime
-  endDate   DateTime
-  status    String   // e.g., "reserved", "rented", "returned", "cancelled"
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Booking {
+  id            String    @id @default(uuid())
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id])
+  userName      String
+  location      String
+  pickUpDate    DateTime
+  dropOffDate   DateTime
+  pickUpTime    String
+  dropOffTime   String
+  contactNumber String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   @@index([productId])
 }
+
 
 model OrderItem{
     id        String   @id @default(uuid())
